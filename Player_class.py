@@ -1,7 +1,7 @@
 import random
-from Role_Playing_Game import *
 from Prabhjots_library import *
 from RPG_classes import *
+from RPG_Variables import *
 
 
 class Inventory:
@@ -12,7 +12,52 @@ class Inventory:
 
     def display_items(self):
         ui_title("YOUR ITEMS")
-        ui(*self.player_itemsitems)
+        ui(*self.player_items[0])
+
+        position = 0
+
+        run = True
+        run1 = True
+
+        while run:
+            while run1:
+                ui("[W]To Scroll Up.",
+               "[S]To Scroll Down.")
+                scroll = ui_input("Scroll : ")
+                if scroll == "S":
+                    if position < len(self.player_items):
+                        position += 1
+                    run1 = False
+                elif scroll == "W":
+                    if position > 0:
+                        position -= 1
+                    run1 = False
+                else:
+                    ui("Not Valid Option")
+            run1 = True
+            ui(*self.player_items[position])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+        ui_title("YOUR ITEMS")
+        for item in self.player_items:
+            ui(*item)
+            """
 
 
 class Player:

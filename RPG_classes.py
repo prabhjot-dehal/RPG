@@ -1,14 +1,10 @@
 import random
 from Prabhjots_library import *
 from Player_class import *
-
+from RPG_Variables import *
 __author__ = 'prabh_000'
 
-players = {}
-players_list = []
-classes = ["Fighter", "Mage", "Archer", ]
-classes1 = ["Class1 : Fighter", "Class2 : Mage", "Class3 : Archer"]
-level = 1
+
 
 
 class Enemies:
