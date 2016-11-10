@@ -1,16 +1,9 @@
 __author__ = 'prabh_000'
-from Player_class import *
 
 import time
-
 import random
-
 from Prabhjots_library import *
-
 from RPG_classes import *
-
-
-
 
 
 with open("ITEMS.txt", "r") as f:
@@ -20,10 +13,7 @@ for i in range(0, len(items)):
     items[i] = items[i].split(",")
 print(items)
 
-
 new_page()
-
-
 
 
 def generate_players():
@@ -69,9 +59,10 @@ start()
 def game():
     dungeon = Floor()
 
+
 players_list[1].player_inventory.player_items.append(items[0])
-
-
-game()
+players_list[1].player_inventory.player_items.append(items[1])
+players_list[1].player_inventory.player_items.append(items[2])
+players_list[1].player_inventory.player_items.append(items[3])
 
 players_list[1].player_inventory.display_items()
