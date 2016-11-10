@@ -1,5 +1,6 @@
 import random
 from Prabhjots_library import *
+from Player_class import *
 
 __author__ = 'prabh_000'
 
@@ -19,7 +20,6 @@ class Enemies:
 
     def __init__(self, difficulty):
         self.hp = (difficulty * level) / 2
-        print(players_list)
         self.strength = (5 / 4) * difficulty
         self.attack = difficulty
         self.defence = (5 / 4) * difficulty
@@ -42,9 +42,9 @@ class Floor:
     no_enemies = 0
 
     def __init__(self):
-        difficulty = random.randint(1, 3)
-        enemies = []
-        no_enemies = random.randint(4, 8)
-        for i in range(0, no_enemies):
-            enemies.append(Enemies(difficulty))
+        self.difficulty = random.randint(1, 3)
+        self.enemies = []
+        self.no_enemies = random.randint(4, 8)
+        for i in range(0, self.no_enemies):
+            self.enemies.append(Enemies(self.difficulty))
 

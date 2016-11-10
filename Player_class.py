@@ -1,6 +1,18 @@
 import random
+from Role_Playing_Game import *
 from Prabhjots_library import *
 from RPG_classes import *
+
+
+class Inventory:
+    def __init__(self):
+        pass
+
+    player_items = []
+
+    def display_items(self):
+        ui_title("YOUR ITEMS")
+        ui(*self.player_itemsitems)
 
 
 class Player:
@@ -14,6 +26,7 @@ class Player:
     speed = 0
     luck = 0
     combat_level = 0
+    player_inventory = Inventory()
 
     def __init__(self):
         name = ui_input("Name this player : ")
@@ -88,3 +101,5 @@ class Player:
            attack,
            speed,
            defense)
+
+
