@@ -37,7 +37,7 @@ def start():
     ui("[N] Any number to Play",
        "[L] Any letter to Quit")
     try:
-        next = ui_input("Pick a choice")
+        next = int(ui_input("Pick a choice"))
     except ValueError:
         ui("Too Scared? Goodbye")
         quit()
