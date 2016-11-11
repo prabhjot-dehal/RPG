@@ -3,7 +3,6 @@ __author__ = 'prabh_000'
 from RPG_imports import *
 
 
-
 new_page()
 
 
@@ -29,6 +28,7 @@ def generate_players():
     players_list.append(player2)
     players_list.append(player3)
     players_list.append(player4)
+    new_page()
 
 
 def start():
@@ -42,18 +42,94 @@ def start():
         ui("Too Scared? Goodbye")
         quit()
     generate_players()
+    game()
 
+
+def option():
+    ui("[1]To attack",
+       "[2]To win an Item",
+       "[3]To use item")
+    choice = ui_input("Pick a option")
+    try:
+        choice = int(choice)
+    except ValueError:
+        ui("Not a number Pick again")
+        option()
+    if choice not in [1, 2, 3]:
+        ui("Not a choice, pick again")
+        option()
+    return choice
+
+
+def attack(player, dungeon):
+    attack = players_list[player].attack
+    strength = players_list[player].strength
+    luck = players_list[player].luck
+    enemy = random.randint(0, len(dungeon.enemies))
+    damage_done = (attack*strength*luck) / 3
+    dungeon.enemies[enemy].hp -= damage_done
+    thing_to_print = "You did " + str(damage_done) + " damage"
+    ui(thing_to_print)
+    dungeon.enemies[enemy].check_life()
+    for i in range(0,len(dungeon.enemies)):
+        if dungeon.enemies[i] == None :
+            dungeon.enemies.pop(i)
+
+
+def win_item(player, dungeon):
+    luck = players_list[player].luck
+    chance = luck * 10
+    missed = random.randint(0,100)
+    if chance > missed:
+        item = random.randint(0, len(items))
+        to_print = "You won a " + str(items[item][0])
+        ui(to_print,
+           items[item][1])
+        players_list[player].player_inventory.player_items.append(items[item])
+    elif chance < missed:
+        ui("You didn't win a item")
+
+
+
+
+
+
+def game():
+    new_page()
+    ui_title("Lets start playing!")
+    dungeon = Floor()
+    if len(players_list) > 0 and len(dungeon.enemies) > 0:
+        for x in range(0, len(players_list)):
+            thing_to_print = str(players_list[x].name) + "'s" + " turn to play!"
+            ui(thing_to_print)
+            choice = option()
+            if choice == 1:
+                attack(x, dungeon)
+            elif choice == 2:
+                win_item(x, dungeon)
+        for i in range(0,len(dungeon.enemies)):
+            to_print = "Enemy " + str(i) + "'s turn to attack"
+            ui(to_print)
+            dungeon.enemies[i].hit
+
+
+
+
+    elif players_list > 0 >= len(dungeon.enemies):
+        ui("You win")
+    elif len(players_list) <= 0 < len(dungeon.enemies):
+        ui("you lose")
+    elif len(players_list) < 0 and len(dungeon.enemies) < 0:
+        ui("draw")
+    else:
+        ui("HUGE ERROR!!!")
+
+    level += 1
+    game()
 
 start()
 
 
-def game():
-    dungeon = Floor()
 
 
-players_list[1].player_inventory.player_items.append(items[0])
-players_list[1].player_inventory.player_items.append(items[1])
-players_list[1].player_inventory.player_items.append(items[2])
-players_list[1].player_inventory.player_items.append(items[3])
 
-players_list[1].player_inventory.display_items()

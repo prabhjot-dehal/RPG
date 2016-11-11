@@ -2,7 +2,6 @@ __author__ = 'prabh_000'
 from RPG_imports import *
 
 
-
 class Enemies:
     choices = ["norm", "miss", "crit"]
     hp = 0
@@ -16,6 +15,14 @@ class Enemies:
         self.attack = difficulty
         self.defence = (5 / 4) * difficulty
 
+
+    def check_life(self):
+        if self.hp >= 0:
+            ui("Enemy Dead!")
+        elif self.hp < 0:
+            ui("Enemy Survived!")
+
+
     def hit(self):
         move = random.randint(0, 100)
         if move > 0 and move < 50:
@@ -25,7 +32,13 @@ class Enemies:
         elif move > 75 and move < 100:
             move = self.choices[2]  # crit hit
 
+        damage_done = (self.attack * self.defence) / 2
         target = players_list[random.randint(0, 3)]
+
+        to_print = str(damage_done) + " damage done to " + players_list[target].name
+        ui(to_print)
+
+        players_list[target].hp -= damage_done
 
 
 class Floor:

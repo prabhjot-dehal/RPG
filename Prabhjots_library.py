@@ -67,9 +67,15 @@ def new_page():  # this prints lots of new lines to break up all the diffrents t
     print("\n" * 100)
 
 
-def validate_num(num):
+def validate_num(num, mini = 0, maxi = 100):
     try:
         num = int(num)
-        return int(num)
     except ValueError:
-        return "False"
+        ui("Not a number")
+        return False
+    if num < mini or num > maxi:
+        to_print = "Not between " + str(mini) + " and " + str(maxi)
+        ui(to_print)
+        return False
+    elif maxi > num > mini:
+        return num

@@ -18,7 +18,7 @@ class Inventory:
 
         while run:
             ui("[W]To Scroll Up.",
-            "[S]To Scroll Down.")
+               "[S]To Scroll Down.")
             while run1:
                 scroll = ui_input("Scroll : ")
                 if scroll == "S":
@@ -37,26 +37,10 @@ class Inventory:
                     ui("Not Valid Option")
             run1 = True
             new_page()
-            pos_str = "ITEM "+str(position + 1)
+            pos_str = "ITEM " + str(position + 1)
             ui_title(pos_str)
             ui(self.player_items[position][0],
                self.player_items[position][1])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 """
@@ -85,20 +69,11 @@ class Player:
         self.name = name
 
         ui("WARRIOR CLASSES", *classes1)
-        player_class = ui_input("Pick a  Warrior Class [1-3]")
-        check = validate_num(player_class)
-
-        while check == "False":
-            ui("Not a Number")
+        check = False
+        while not check:
             player_class = ui_input("Pick a  Warrior Class [1-3]")
-            check = validate_num(player_class)
+            check = validate_num(player_class, 0, 4)
 
-        check = int(check)
-
-        while check > 3 or check < 1:
-            ui("Not Between 1 and 3")
-            player_class = ui_input("Enter Again : ")
-            check = player_class
 
         player_class = int(player_class)
         player_class -= 1
@@ -114,6 +89,8 @@ class Player:
             self.speed = self.level * 2
             self.luck = random.randint(1, 2)
             self.combat_level = self.strength + self.attack + self.defense
+            self.player_inventory.player_items.append(items[0])
+            self.player_inventory.player_items.append(items[1])
         elif player_class == "Mage":
             self.hp = self.level * 15
             self.strength = self.level * 2
@@ -122,6 +99,8 @@ class Player:
             self.speed = self.level * 3
             self.luck = random.randint(2, 4)
             self.combat_level = self.strength + self.attack + self.defense
+            self.player_inventory.player_items.append(items[0])
+            self.player_inventory.player_items.append(items[8])
         elif player_class == "Archer":
             self.hp = self.level * 15
             self.strength = self.level * 2
@@ -130,6 +109,8 @@ class Player:
             self.speed = self.level * 5
             self.luck = random.randint(1, 2)
             self.combat_level = self.strength + self.attack + self.defense
+            self.player_inventory.player_items.append(items[0])
+            self.player_inventory.player_items.append(items[6])
         else:
             ui("HUGE ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
@@ -152,5 +133,12 @@ class Player:
            attack,
            speed,
            defense)
+
+
+    def life_check(self):
+        if self.hp >= 0:
+            ui("Player killed")
+        elif self.hp < 0:
+            ui("Player still alive")
 
 
