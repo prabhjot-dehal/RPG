@@ -17,22 +17,31 @@ class Inventory:
         run1 = True
 
         while run:
+            ui("[W]To Scroll Up.",
+            "[S]To Scroll Down.")
             while run1:
-                ui("[W]To Scroll Up.",
-               "[S]To Scroll Down.")
                 scroll = ui_input("Scroll : ")
                 if scroll == "S":
-                    if position < len(self.player_items):
+                    if position < len(self.player_items) - 1:
                         position += 1
+                    else:
+                        ui("End of list")
                     run1 = False
                 elif scroll == "W":
                     if position > 0:
                         position -= 1
+                    else:
+                        ui("Top of list")
                     run1 = False
                 else:
                     ui("Not Valid Option")
             run1 = True
-            ui(*self.player_items[position])
+            new_page()
+            pos_str = "ITEM "+str(position + 1)
+            ui_title(pos_str)
+            ui(self.player_items[position][0],
+               self.player_items[position][1])
+
 
 
 
