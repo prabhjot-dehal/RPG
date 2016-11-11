@@ -1,9 +1,5 @@
-import random
-from Prabhjots_library import *
-from Player_class import *
-from RPG_Variables import *
 __author__ = 'prabh_000'
-
+from RPG_imports import *
 
 
 

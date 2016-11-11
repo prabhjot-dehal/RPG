@@ -1,7 +1,4 @@
-import random
-from Prabhjots_library import *
-from RPG_classes import *
-from RPG_Variables import *
+from RPG_imports import *
 
 
 class Inventory:

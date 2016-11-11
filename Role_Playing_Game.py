@@ -1,17 +1,8 @@
 __author__ = 'prabh_000'
 
-import time
-import random
-from Prabhjots_library import *
-from RPG_classes import *
-from RPG_Variables import *
+from RPG_imports import *
 
-with open("ITEMS.txt", "r") as f:
-    file = f.read()
-items = file.split("\n")
-for i in range(0, len(items)):
-    items[i] = items[i].split(",")
-print(items)
+
 
 new_page()
 
