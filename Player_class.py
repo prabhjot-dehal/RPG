@@ -141,4 +141,15 @@ class Player:
         elif self.hp < 0:
             ui("Player still alive")
 
+    def attack(self,dungeon):
+        enemy = random.randint(0, len(dungeon.enemies))
+        damage_done = (self.attack * self.strength * self.luck) / 3
+        dungeon.enemies[enemy].hp -= damage_done
+        thing_to_print = "You did " + str(damage_done) + " damage"
+        ui(thing_to_print)
+        dungeon.enemies[enemy].check_life()
+        for i in range(0,len(dungeon.enemies)):
+            if dungeon.enemies[i] == None :
+                dungeon.enemies.pop(i)
+
 

@@ -61,31 +61,19 @@ def option():
     return choice
 
 
-def attack(player, dungeon):
-    attack = players_list[player].attack
-    strength = players_list[player].strength
-    luck = players_list[player].luck
-    enemy = random.randint(0, len(dungeon.enemies))
-    damage_done = (attack*strength*luck) / 3
-    dungeon.enemies[enemy].hp -= damage_done
-    thing_to_print = "You did " + str(damage_done) + " damage"
-    ui(thing_to_print)
-    dungeon.enemies[enemy].check_life()
-    for i in range(0,len(dungeon.enemies)):
-        if dungeon.enemies[i] == None :
-            dungeon.enemies.pop(i)
+
 
 
 def win_item(player, dungeon):
     luck = players_list[player].luck
     chance = luck * 10
-    missed = random.randint(0,100)
+    missed = random.randint(0, 100)
     if chance > missed:
         item = random.randint(0, len(items))
         to_print = "You won a " + str(items[item][0])
         ui(to_print,
            items[item][1])
-        players_list[player].player_inventory.player_items.append(items[item])
+        players_list[player].player_inventory.player_items.append(items[0])
     elif chance < missed:
         ui("You didn't win a item")
 
@@ -104,7 +92,7 @@ def game():
             ui(thing_to_print)
             choice = option()
             if choice == 1:
-                attack(x, dungeon)
+                players_list[x].attack(dungeon)
             elif choice == 2:
                 win_item(x, dungeon)
         for i in range(0,len(dungeon.enemies)):
