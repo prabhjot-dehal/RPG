@@ -73,7 +73,7 @@ def win_item(player, dungeon):
         to_print = "You won a " + str(items[item][0])
         ui(to_print,
            items[item][1])
-        players_list[player].player_inventory.player_items.append(items[0])
+        players_list[player].player_inventory.player_items.append(items[item])
     elif chance < missed:
         ui("You didn't win a item")
 
